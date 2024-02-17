@@ -1,5 +1,6 @@
+import { AppThemeProvider } from "@/components/AppThemeProvider";
 import { AppMetadata } from "@/constants";
-import classNames from "classnames";
+import { clsx } from "clsx";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import { ReactNode } from "react";
@@ -15,14 +16,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={classNames(
+        className={clsx(
           GeistSans.className,
           "min-h-screen bg-background antialiased"
         )}
       >
-        {children}
+        <AppThemeProvider
+          enableSystem
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+        >
+          <main className="flex-1">{children}</main>
+        </AppThemeProvider>
       </body>
     </html>
   );
