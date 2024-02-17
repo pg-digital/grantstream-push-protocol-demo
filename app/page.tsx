@@ -1,5 +1,6 @@
 import { Container } from "@/components/layout/Container";
 import { HeroSection } from "@/components/ui/HeroSection";
+import { TeamMembers } from "@/components/ui/TeamMembers";
 import { AppMetadata } from "@/constants";
 import { Metadata } from "next";
 
@@ -15,9 +16,15 @@ export default function DemoPage() {
   return (
     <Container>
       <HeroSection title={PageMetaData.Title}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
+        A simple demo for GrantStream MVP to test being able to provide user
+        support using Notion&apos;s web3 messaging protocol.
       </HeroSection>
+
+      <div className="flex justify-center">
+        <div className="w-full max-w-[660px]">
+          <TeamMembers />
+        </div>
+      </div>
     </Container>
   );
 }

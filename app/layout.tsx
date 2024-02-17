@@ -1,4 +1,5 @@
-import { AppThemeProvider } from "@/components/AppThemeProvider";
+import { AppThemeProvider } from "@/components/providers/AppThemeProvider";
+import { AppWagmiProvider } from "@/components/providers/AppWagmiProvider";
 import { AppMetadata } from "@/constants";
 import { clsx } from "clsx";
 import { GeistSans } from "geist/font/sans";
@@ -26,10 +27,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <AppThemeProvider
           enableSystem
           attribute="class"
-          defaultTheme="system"
           disableTransitionOnChange
         >
-          <main className="flex-1">{children}</main>
+          <AppWagmiProvider>
+            <main className="flex-1">{children}</main>
+          </AppWagmiProvider>
         </AppThemeProvider>
       </body>
     </html>
