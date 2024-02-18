@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../Card";
+import { Skeleton } from "../Skeleton";
 import { teamMembers } from "./data";
 import { TeamMember } from "./types";
 import {
@@ -21,7 +22,7 @@ import {
 
 function BadgeAvailable() {
   return (
-    <Badge className="justify-center w-min-[115px]" variant="default">
+    <Badge className="justify-center min-w-[115px]" variant="default">
       Available
     </Badge>
   );
@@ -29,14 +30,14 @@ function BadgeAvailable() {
 
 function BadgeUnavailable() {
   return (
-    <Badge className="justify-center w-min-[115px]" variant="secondary">
+    <Badge className="justify-center min-w-[115px]" variant="secondary">
       Offline
     </Badge>
   );
 }
 
 function MemberContent({ name, wallet, available }: TeamMember) {
-  const { data } = useEnsName({ address: wallet });
+  const { data, isLoading } = useEnsName({ address: wallet });
 
   return (
     <div className="flex items-center justify-between space-x-4">
@@ -44,14 +45,19 @@ function MemberContent({ name, wallet, available }: TeamMember) {
         <Avatar>
           <AvatarFallback>{getAvatarFallback(name)}</AvatarFallback>
         </Avatar>
-        <div className="grid">
+        <div className="grid gap-y-[0.2rem]">
           <p className="text-sm font-medium">{name}</p>
-          <p className="text-sm text-muted-foreground truncate w-min-[200px]">
-            {data || truncateEthAddress(wallet, { nSuffix: 10, nPrefix: 10 })}
-          </p>
+
+          {isLoading ? (
+            <Skeleton className="w-[200px] h-[14px]" />
+          ) : (
+            <p className="text-sm leading-none text-muted-foreground truncate min-w-[200px]">
+              {data || truncateEthAddress(wallet, { nSuffix: 10, nPrefix: 10 })}
+            </p>
+          )}
         </div>
       </div>
-      <div className="hidden md:flex flex-col items-center space-y-1">
+      <div className="hidden md:flex flex-col items-center space-y-1.5">
         {isMemberAvailable(available) ? (
           <BadgeAvailable />
         ) : (

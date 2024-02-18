@@ -27,6 +27,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <AppThemeProvider
           enableSystem
           attribute="class"
+          defaultTheme="system"
           disableTransitionOnChange
         >
           <AppWagmiProvider>
