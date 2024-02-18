@@ -1,11 +1,17 @@
+export interface Time {
+  hours: number;
+  minutes?: number;
+}
+
+export interface Available {
+  tz: string;
+  endTime: Time;
+  startTime: Time;
+}
+
 export interface TeamMember {
   id: number;
   name: string;
-  email: string;
-  wallet: string;
-  available: {
-    tz: string;
-    endTime: number;
-    startTime: number;
-  };
+  wallet: `0x${string}`;
+  available: Available;
 }

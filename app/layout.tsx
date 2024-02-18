@@ -1,7 +1,7 @@
 import { AppThemeProvider } from "@/components/providers/AppThemeProvider";
 import { AppWagmiProvider } from "@/components/providers/AppWagmiProvider";
 import { AppMetadata } from "@/constants";
-import { clsx } from "clsx";
+import { cn } from "@/utils";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import { ReactNode } from "react";
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={clsx(
+        className={cn(
           GeistSans.className,
           "min-h-screen bg-background antialiased"
         )}
