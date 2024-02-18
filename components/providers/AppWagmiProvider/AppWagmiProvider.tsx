@@ -1,9 +1,9 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { mainnet, sepolia } from "@wagmi/core/chains";
 import { ReactNode } from "react";
 import { WagmiProvider, createConfig, http } from "wagmi";
-import { mainnet } from "wagmi/chains";
 import { injected } from "wagmi/connectors";
 
 interface AppWagmiProviderProps {
@@ -11,9 +11,12 @@ interface AppWagmiProviderProps {
 }
 
 const wagmiConfig = createConfig({
-  transports: { [mainnet.id]: http() },
+  chains: [mainnet, sepolia],
+  transports: {
+    [mainnet.id]: http(),
+    [sepolia.id]: http(),
+  },
   connectors: [injected()],
-  chains: [mainnet],
 });
 
 const queryClient = new QueryClient();
