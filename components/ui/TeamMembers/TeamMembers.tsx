@@ -1,10 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
-import { useLoadingSimulation } from "@/hooks";
+import { useIsServerSide } from "@/hooks";
 import { cn, truncateEthAddress } from "@/utils";
-import { Check, X as Cross, Loader2 as Spinner } from "lucide-react";
-import { useState } from "react";
+import { Check, X as Cross } from "lucide-react";
 import { useEnsName } from "wagmi";
 import { Avatar, AvatarFallback } from "../Avatar";
 import { Badge } from "../Badge";
@@ -16,6 +14,8 @@ import {
   CardTitle,
 } from "../Card";
 import { Skeleton } from "../Skeleton";
+import { ConnectWalletButton } from "./ConnectWalletButton";
+import { LoadingWalletButton } from "./LoadingWalletButton";
 import { teamMembers } from "./data";
 import {
   MemberNameProps,
@@ -109,37 +109,9 @@ function MemberContent({ name, address, available }: TeamMember) {
   );
 }
 
-function ConnectWalletButton() {
-  const [isConnected, setIsConnected] = useState(false);
-  const { isLoading } = useLoadingSimulation({
-    on: isConnected,
-  });
-
-  const onConnectClick = () => {
-    setIsConnected(true);
-  };
-
-  const onDisconnectClick = () => {
-    setIsConnected(false);
-  };
-
-  return (
-    <Button
-      disabled={isLoading}
-      variant={!isConnected ? "default" : "secondary"}
-      onClick={!isConnected ? onConnectClick : onDisconnectClick}
-    >
-      {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
-      {isLoading
-        ? "Please wait"
-        : !isConnected
-        ? "Connect wallet"
-        : "Disconnect wallet"}
-    </Button>
-  );
-}
-
 export function TeamMembers() {
+  const { isServerSide } = useIsServerSide();
+
   return (
     <Card>
       <CardHeader>
@@ -152,7 +124,8 @@ export function TeamMembers() {
         {teamMembers.map((teamMember) => (
           <MemberContent key={teamMember.id} {...teamMember} />
         ))}
-        <ConnectWalletButton />
+        {/* Only available on client-side, prevents hydration issues. */}
+        {isServerSide ? <LoadingWalletButton /> : <ConnectWalletButton />}
       </CardContent>
     </Card>
   );

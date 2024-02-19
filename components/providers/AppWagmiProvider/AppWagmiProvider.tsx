@@ -1,5 +1,6 @@
 "use client";
 
+import { isModeProd } from "@/utils";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { mainnet, sepolia } from "@wagmi/core/chains";
 import { ReactNode } from "react";
@@ -11,10 +12,10 @@ interface AppWagmiProviderProps {
 }
 
 const wagmiConfig = createConfig({
-  chains: [mainnet, sepolia],
+  chains: !isModeProd() ? [sepolia] : [mainnet],
   transports: {
-    [mainnet.id]: http(),
     [sepolia.id]: http(),
+    [mainnet.id]: http(),
   },
   connectors: [injected()],
 });
