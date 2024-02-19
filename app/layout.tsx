@@ -13,6 +13,7 @@ interface RootLayoutProps {
 
 export const metadata: Metadata = {
   title: AppMetadata.TitlePrefix,
+  description: AppMetadata.Description,
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {

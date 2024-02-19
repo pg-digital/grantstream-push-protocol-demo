@@ -1,11 +1,10 @@
 import { Container } from "@/components/layout/Container";
 import { HeroSection } from "@/components/ui/HeroSection";
-import { TeamMembers } from "@/components/ui/TeamMembers";
 import { AppMetadata } from "@/constants";
 import { Metadata } from "next";
 
 enum PageMetaData {
-  Title = "Push protocol demo",
+  Title = "Page not found",
 }
 
 export const metadata: Metadata = {
@@ -13,18 +12,12 @@ export const metadata: Metadata = {
   description: AppMetadata.Description,
 };
 
-export default function DemoPage() {
+export default function NotFoundPage() {
   return (
     <Container>
       <HeroSection title={PageMetaData.Title}>
         {AppMetadata.Description}
       </HeroSection>
-
-      <div className="flex justify-center">
-        <div className="w-full max-w-[620px]">
-          <TeamMembers />
-        </div>
-      </div>
     </Container>
   );
 }
