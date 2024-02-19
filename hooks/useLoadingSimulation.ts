@@ -2,13 +2,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useIsMounted } from ".";
 
 interface UseLoadingSimulationProps {
-  on?: boolean;
-  time?: number;
+  on?: boolean; // If simulation is 'ON' or 'OFF'.
+  time?: number; // Time for the simulation in 'ms'.
 }
 
+// Custom hook for simulating loading behaviour inside a component.
 export function useLoadingSimulation({
-  on = true,
-  time = 3000,
+  on = true, // Default state is 'ON'.
+  time = 3000, // Default time is '3s'.
 }: UseLoadingSimulationProps = {}) {
   const isMounted = useIsMounted();
   const isSimulationRunning = useRef(false);
