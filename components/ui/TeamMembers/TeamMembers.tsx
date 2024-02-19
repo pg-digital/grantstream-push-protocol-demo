@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/ui/Button";
 import { useLoadingSimulation } from "@/hooks";
-import { truncateEthAddress } from "@/utils";
-import { Loader2 as Spinner } from "lucide-react";
+import { cn, truncateEthAddress } from "@/utils";
+import { Check, X as Cross, Loader2 as Spinner } from "lucide-react";
 import { useState } from "react";
 import { useEnsName } from "wagmi";
 import { Avatar, AvatarFallback } from "../Avatar";
@@ -17,14 +17,19 @@ import {
 } from "../Card";
 import { Skeleton } from "../Skeleton";
 import { teamMembers } from "./data";
-import { MemberStatusProps, MemberWalletProps, TeamMember } from "./types";
+import {
+  MemberNameProps,
+  MemberStatusProps,
+  MemberWalletProps,
+  TeamMember,
+} from "./types";
 import {
   formatAvailableTime,
   getAvatarFallback,
-  isMemberAvailable,
+  isMemberAvailableNow,
 } from "./utils";
 
-function MemberStatus({ isAvailable }: MemberStatusProps) {
+function MemberStatusText({ isAvailable }: MemberStatusProps) {
   return (
     <Badge
       variant={isAvailable ? "default" : "secondary"}
@@ -32,6 +37,30 @@ function MemberStatus({ isAvailable }: MemberStatusProps) {
     >
       {isAvailable ? "Available" : "Offline"}
     </Badge>
+  );
+}
+
+function MemmberStatusIcon({ isAvailable }: MemberStatusProps) {
+  const StatusIcon = isAvailable ? Check : Cross;
+
+  return (
+    <StatusIcon
+      strokeWidth={3}
+      className={cn(
+        "inline md:hidden align-middle h-4 w-4",
+        { "ml-1 text-secondary": !isAvailable },
+        { "ml-1.5 text-primary": isAvailable }
+      )}
+    />
+  );
+}
+
+function MemberName({ name, isAvailable }: MemberNameProps) {
+  return (
+    <p className="text-sm font-medium">
+      {name}
+      <MemmberStatusIcon isAvailable={isAvailable} />
+    </p>
   );
 }
 
@@ -57,6 +86,8 @@ function MemberWallet({ address }: MemberWalletProps) {
 }
 
 function MemberContent({ name, address, available }: TeamMember) {
+  const isAvailableNow = isMemberAvailableNow(available);
+
   return (
     <div className="flex items-center justify-between space-x-4">
       <div className="flex items-center space-x-4">
@@ -64,12 +95,12 @@ function MemberContent({ name, address, available }: TeamMember) {
           <AvatarFallback>{getAvatarFallback(name)}</AvatarFallback>
         </Avatar>
         <div className="grid gap-y-[0.2rem]">
-          <p className="text-sm font-medium">{name}</p>
+          <MemberName name={name} isAvailable={isAvailableNow} />
           <MemberWallet address={address} />
         </div>
       </div>
       <div className="hidden md:flex flex-col items-center space-y-1.5">
-        <MemberStatus isAvailable={isMemberAvailable(available)} />
+        <MemberStatusText isAvailable={isAvailableNow} />
         <p className="text-xs text-muted-foreground">
           {formatAvailableTime(available)}
         </p>

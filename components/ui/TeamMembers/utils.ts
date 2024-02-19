@@ -56,7 +56,7 @@ export function formatAvailableTime({
   return `${start} - ${end}`;
 }
 
-export function isMemberAvailable({
+export function isMemberAvailableNow({
   tz,
   endTime,
   startTime,

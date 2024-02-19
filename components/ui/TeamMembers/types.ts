@@ -25,3 +25,7 @@ export interface MemberStatusProps {
 export interface MemberWalletProps {
   address: TeamMember["address"];
 }
+
+export interface MemberNameProps extends MemberStatusProps {
+  name: TeamMember["name"];
+}
