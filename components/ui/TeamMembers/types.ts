@@ -1,3 +1,5 @@
+import { EthAddress } from "@/types";
+
 export interface Time {
   hours: number;
   minutes?: number;
@@ -12,6 +14,14 @@ export interface Available {
 export interface TeamMember {
   id: number;
   name: string;
-  wallet: `0x${string}`;
+  address: EthAddress;
   available: Available;
+}
+
+export interface MemberStatusProps {
+  isAvailable?: boolean;
+}
+
+export interface MemberWalletProps {
+  address: TeamMember["address"];
 }

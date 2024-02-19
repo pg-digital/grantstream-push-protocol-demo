@@ -21,7 +21,7 @@ export default function DemoPage() {
       </HeroSection>
 
       <div className="flex justify-center">
-        <div className="w-full max-w-[660px]">
+        <div className="w-full max-w-[620px]">
           <TeamMembers />
         </div>
       </div>

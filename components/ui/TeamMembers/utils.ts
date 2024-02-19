@@ -43,7 +43,7 @@ export function formatAvailableTime({
   endTime,
   startTime,
 }: TeamMember["available"]) {
-  const formatStr = "K:mm aaa";
+  const formatStr = "K aaa";
   const timeZone = getCurrentTimeZone();
   const end = format(getDateAtStartOfHours(endTime, tz), formatStr, {
     timeZone,
