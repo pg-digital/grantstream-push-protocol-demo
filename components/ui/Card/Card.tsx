@@ -66,11 +66,11 @@ const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 );
 
 Card.displayName = "Card";
-CardTitle.displayName = "CardTitle";
-CardHeader.displayName = "CardHeader";
-CardDescription.displayName = "CardDescription";
 CardContent.displayName = "CardContent";
+CardDescription.displayName = "CardDescription";
+CardHeader.displayName = "CardHeader";
 CardFooter.displayName = "CardFooter";
+CardTitle.displayName = "CardTitle";
 
 export {
   Card,
