@@ -1,5 +1,21 @@
 import { Button } from "@/components/ui/Button";
+import { useIsServerSide } from "@/hooks";
 
 export function StartChatButton() {
-  return <Button variant="default">Chat with team member</Button>;
+  const { isServerSide } = useIsServerSide();
+
+  const onStartClick = () => {
+    if (!isServerSide) {
+      window.alert(
+        // @TODO: Placeholder message, to be removed once feature is added.
+        "This feature is in-progress, and we're working to release it soon!"
+      );
+    }
+  };
+
+  return (
+    <Button variant="default" onClick={onStartClick}>
+      Chat with team member
+    </Button>
+  );
 }
