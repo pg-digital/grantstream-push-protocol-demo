@@ -22,7 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={cn(
           GeistSans.className,
-          "min-h-screen bg-background antialiased"
+          "flex items-center min-h-screen bg-background antialiased pt-8 pb-12 md:pt-12 md:pb-16 lg:pt-16 lg:pb-20"
         )}
       >
         <AppThemeProvider

@@ -1,8 +1,18 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
+import { ReactNode } from "react";
 import { useAccount, useChains, useConnect, useDisconnect } from "wagmi";
 import { LoadingWalletButton } from "./LoadingWalletButton";
+import { StartChatButton } from "./StartChatButton";
+
+interface WrapperProps {
+  children: ReactNode;
+}
+
+function Wrapper({ children }: WrapperProps) {
+  return <div className="grid gap-4">{children}</div>;
+}
 
 export function ConnectWalletButton() {
   const chains = useChains();
@@ -22,20 +32,29 @@ export function ConnectWalletButton() {
   };
 
   if (isConnecting) {
-    return <LoadingWalletButton />;
+    return (
+      <Wrapper>
+        <LoadingWalletButton />
+      </Wrapper>
+    );
   }
 
   if (!isConnected) {
     return (
-      <Button variant="default" onClick={onConnectClick}>
-        Connect wallet
-      </Button>
+      <Wrapper>
+        <Button variant="default" onClick={onConnectClick}>
+          Connect wallet
+        </Button>
+      </Wrapper>
     );
   }
 
   return (
-    <Button variant="secondary" onClick={onDisconnectClick}>
-      Disconnect wallet
-    </Button>
+    <Wrapper>
+      <StartChatButton />
+      <Button variant="secondary" onClick={onDisconnectClick}>
+        Disconnect wallet
+      </Button>
+    </Wrapper>
   );
 }

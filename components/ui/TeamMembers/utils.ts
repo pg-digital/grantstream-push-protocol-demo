@@ -1,9 +1,26 @@
 import { isAfter, isBefore } from "date-fns";
-import { format, utcToZonedTime } from "date-fns-tz";
+import { format, utcToZonedTime, zonedTimeToUtc } from "date-fns-tz";
 import { TeamMember, Time } from "./types";
 
-export function getCurrentTimeZone() {
+function getCurrentTimeZone() {
   return Intl.DateTimeFormat().resolvedOptions().timeZone;
+}
+
+function convertDateToTimeZone(date: Date, fromTz: string, toTz: string) {
+  return utcToZonedTime(zonedTimeToUtc(date, fromTz), toTz);
+}
+
+function getDateNowInTimeZone(tz: string) {
+  return convertDateToTimeZone(new Date(), getCurrentTimeZone(), tz);
+}
+
+function getDateAtStartOfTime(time: Time, tz: string) {
+  let date = getDateNowInTimeZone(tz);
+  date.setMinutes(time.minutes || 0);
+  date.setHours(time.hours);
+  date.setMilliseconds(0);
+  date.setSeconds(0);
+  return date;
 }
 
 export function getAvatarFallback(name: TeamMember["name"]) {
@@ -25,33 +42,21 @@ export function getAvatarFallback(name: TeamMember["name"]) {
   return "NA";
 }
 
-export function getDateAtStartOfHours(time: Time, tz?: string) {
-  const date = new Date();
-  date.setMilliseconds(0);
-  date.setHours(time.hours);
-  date.setMinutes(time.minutes || 0);
-
-  if (tz) {
-    return utcToZonedTime(date, tz);
-  }
-
-  return date;
-}
-
 export function formatAvailableTime({
   tz,
   endTime,
   startTime,
 }: TeamMember["available"]) {
-  const formatStr = "K aaa";
-  const timeZone = getCurrentTimeZone();
-  const end = format(getDateAtStartOfHours(endTime, tz), formatStr, {
-    timeZone,
-  });
+  const formatStr = "h aaa";
+  const end = format(
+    zonedTimeToUtc(getDateAtStartOfTime(endTime, tz), tz),
+    formatStr
+  );
 
-  const start = format(getDateAtStartOfHours(startTime, tz), formatStr, {
-    timeZone,
-  });
+  const start = format(
+    zonedTimeToUtc(getDateAtStartOfTime(startTime, tz), tz),
+    formatStr
+  );
 
   return `${start} - ${end}`;
 }
@@ -61,9 +66,8 @@ export function isMemberAvailableNow({
   endTime,
   startTime,
 }: TeamMember["available"]) {
-  const timeZone = getCurrentTimeZone();
-  const end = getDateAtStartOfHours(endTime, tz);
-  const start = getDateAtStartOfHours(startTime, tz);
-  const timeNow = utcToZonedTime(new Date(), timeZone);
-  return isAfter(timeNow, start) && isBefore(timeNow, end);
+  const now = getDateNowInTimeZone(tz);
+  const end = getDateAtStartOfTime(endTime, tz);
+  const start = getDateAtStartOfTime(startTime, tz);
+  return isAfter(now, start) && isBefore(now, end);
 }
