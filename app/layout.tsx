@@ -21,10 +21,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(
-          GeistSans.className,
-          "flex items-center min-h-screen bg-background antialiased pt-[3.75rem]"
-        )}
+        className={cn("bg-background antialiased m-0 p-0", GeistSans.className)}
       >
         <AppThemeProvider
           enableSystem
@@ -33,10 +30,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
           disableTransitionOnChange
         >
           <AppWagmiProvider>
-            <AppNavHeader />
-            <main className="flex-1 pt-10 pb-16 md:pt-12 md:pb-20 lg:pb-28">
-              {children}
-            </main>
+            <div className="flex items-center justify-center min-h-screen pt-[66px]">
+              <AppNavHeader />
+              <main className="flex-1 pt-10 pb-16 md:pt-12 md:pb-20 lg:pb-28">
+                {children}
+              </main>
+            </div>
           </AppWagmiProvider>
         </AppThemeProvider>
       </body>
