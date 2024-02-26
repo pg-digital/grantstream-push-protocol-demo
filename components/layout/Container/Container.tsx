@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 type Padding = "default" | "none";
 
-type Size = "default" | "small";
+type Size = "default" | "small" | "full";
 
 interface ContainerProps {
   children: ReactNode;
@@ -23,6 +23,7 @@ export function Container({
       className={cn(
         "container relative",
         { "p-0": padding === "none" },
+        { "max-w-full": size === "full" },
         { "max-w-[620px]": size === "small" },
         className
       )}
