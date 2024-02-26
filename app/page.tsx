@@ -21,9 +21,9 @@ export default function DemoPage() {
       </HeroSection>
 
       <div className="flex justify-center">
-        <div className="w-full max-w-[620px]">
+        <Container size="small" padding="none">
           <TeamMembers />
-        </div>
+        </Container>
       </div>
     </Container>
   );
