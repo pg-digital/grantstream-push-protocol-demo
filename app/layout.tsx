@@ -43,9 +43,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={cn("bg-background antialiased m-0 p-0", GeistSans.className)}
       >
         <AppThemeProvider
-          enableSystem
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           disableTransitionOnChange
         >
           <AppWagmiProvider>
