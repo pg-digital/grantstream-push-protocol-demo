@@ -25,6 +25,8 @@
     "react-dom": "^18",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
+    "three": "0.68.0",
+    "usehooks-ts": "^2.15.1",
     "viem": "^2.7.10",
     "wagmi": "^2.5.7"
   },
@@ -32,6 +34,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/three": "0.81.0",
     "autoprefixer": "^10.0.1",
     "encoding": "^0.1.13",
     "eslint": "^8",
