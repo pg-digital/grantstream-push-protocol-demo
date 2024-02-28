@@ -7,6 +7,7 @@ import {
 } from "@/hooks";
 import { cn } from "@/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { CanvasRenderer, PerspectiveCamera, Scene, Sprite } from "three";
 import { ParticleColor, ParticlePhysics } from "./constants";
 import {
@@ -26,7 +27,7 @@ let particle: Sprite | undefined;
 let frameId: number | undefined;
 let count = 0;
 
-export function BackgroundWaves() {
+function BackgroundWaveParticles() {
   const isMounted = useIsMounted();
   const mediaQuery = useCustomMediaQuery();
   const { isThemeDark } = useCustomThemeQuery();
@@ -166,5 +167,13 @@ export function BackgroundWaves() {
       )}
       ref={containerRef}
     />
+  );
+}
+
+export function BackgroundWaves() {
+  return (
+    <ErrorBoundary fallback={null}>
+      <BackgroundWaveParticles />
+    </ErrorBoundary>
   );
 }
