@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
+import { AnimatePresence, AnimationProps, motion } from "framer-motion";
 import { ReactNode } from "react";
 import { useAccount, useChains, useConnect, useDisconnect } from "wagmi";
 import { LoadingWalletButton } from "./LoadingWalletButton";
@@ -11,7 +12,7 @@ interface WrapperProps {
 }
 
 function Wrapper({ children }: WrapperProps) {
-  return <div className="grid gap-4">{children}</div>;
+  return <div className="grid">{children}</div>;
 }
 
 export function ConnectWalletButton() {
@@ -31,30 +32,55 @@ export function ConnectWalletButton() {
     disconnect();
   };
 
-  if (isConnecting) {
-    return (
-      <Wrapper>
-        <LoadingWalletButton />
-      </Wrapper>
-    );
-  }
+  // Motion animations for '<StartChatButton />'.
+  const fromAnimProps: AnimationProps["initial"] = {
+    marginBottom: 0,
+    opacity: 0,
+    height: 0,
+  };
 
-  if (!isConnected) {
-    return (
-      <Wrapper>
-        <Button variant="default" onClick={onConnectClick}>
-          Connect wallet
-        </Button>
-      </Wrapper>
-    );
-  }
+  const toAnimProps: AnimationProps["animate"] = {
+    marginBottom: "1rem",
+    height: "auto",
+    opacity: 1,
+    transition: {
+      delay: 0.25,
+    },
+  };
+
+  const exitAnimProps: AnimationProps["exit"] = {
+    ...fromAnimProps,
+    transition: {
+      duration: 0.35,
+    },
+  };
 
   return (
     <Wrapper>
-      <StartChatButton />
-      <Button variant="secondary" onClick={onDisconnectClick}>
-        Disconnect wallet
-      </Button>
+      {isConnecting && <LoadingWalletButton />}
+
+      <AnimatePresence>
+        {!isConnecting && isConnected && (
+          <motion.div
+            initial={fromAnimProps}
+            animate={toAnimProps}
+            exit={exitAnimProps}
+            className="z-0"
+          >
+            <StartChatButton />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {!isConnecting && (
+        <Button
+          onClick={!isConnected ? onConnectClick : onDisconnectClick}
+          variant={!isConnected ? "default" : "secondary"}
+          className="z-1 w-full"
+        >
+          {!isConnected ? "Connect" : "Disconnect"} wallet
+        </Button>
+      )}
     </Wrapper>
   );
 }

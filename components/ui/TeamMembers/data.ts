@@ -14,7 +14,7 @@ export const teamMembers: Readonly<TeamMember[]> = [
   {
     id: 2,
     name: "Ryan Turner",
-    address: "0xe563E61293274d15683Ca31363f17C7A2E3B1F6e",
+    address: "0x44940C3C183145195Fb99Ed2300a33Ea4ae0a538",
     available: {
       startTime: { hours: 9, minutes: 0 },
       endTime: { hours: 14, minutes: 0 },
@@ -44,7 +44,7 @@ export const teamMembers: Readonly<TeamMember[]> = [
   {
     id: 5,
     name: "Tomé Couceiro",
-    address: "0xED3b5B9dFC5238Df12CcE090Db314fe1Ca4a189F",
+    address: "0x86EcD9AA8643f29e98b267f8E0aC2B1a2d839CB7",
     available: {
       startTime: { hours: 14, minutes: 0 },
       endTime: { hours: 19, minutes: 0 },

@@ -154,7 +154,7 @@ function BackgroundWaveParticles() {
     // Delay makes transition smoother.
     const timeoutId = setInterval(() => {
       if (isMounted()) setIsAnimating(true);
-    }, 100);
+    }, 150);
 
     return () => clearTimeout(timeoutId);
   }, [isMounted, canAnimate, isThemeDark, mediaQuery, animateParticles]);
@@ -162,7 +162,7 @@ function BackgroundWaveParticles() {
   return (
     <div
       className={cn(
-        "absolute top-0 left-0 w-screen h-screen z-0 opacity-0 transition-opacity duration-1000",
+        "absolute top-0 left-0 w-screen h-screen z-0 opacity-0 transition-opacity duration-700",
         { "opacity-100": isAnimating }
       )}
       ref={containerRef}

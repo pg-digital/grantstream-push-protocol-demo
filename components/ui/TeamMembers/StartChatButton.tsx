@@ -14,7 +14,7 @@ export function StartChatButton() {
   };
 
   return (
-    <Button variant="default" onClick={onStartClick}>
+    <Button variant="default" className="w-full" onClick={onStartClick}>
       Chat with team member
     </Button>
   );
