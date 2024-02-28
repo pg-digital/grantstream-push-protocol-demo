@@ -6,7 +6,7 @@ import {
   useIsMounted,
 } from "@/hooks";
 import { cn } from "@/utils";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { CanvasRenderer, PerspectiveCamera, Scene, Sprite } from "three";
 import { ParticleColor, ParticlePhysics } from "./constants";
 import {
@@ -23,6 +23,7 @@ let scene: Scene | undefined;
 
 let particles: Sprite[] | undefined;
 let particle: Sprite | undefined;
+let frameId: number | undefined;
 let count = 0;
 
 export function BackgroundWaves() {
@@ -44,7 +45,7 @@ export function BackgroundWaves() {
     }
   };
 
-  const render = () => {
+  const renderParticles = useCallback(() => {
     if (particles?.length && renderer && scene && camera) {
       let i = 0;
       for (let ix = 0; ix < ParticlePhysics.AmountX; ix++) {
@@ -62,13 +63,21 @@ export function BackgroundWaves() {
       }
 
       renderer.render(scene, camera);
+      // This increases or decrease particle speed.
       count += determineSpeedFromQuery(mediaQuery);
     }
-  };
+  }, [mediaQuery]);
 
-  const animate = () => {
-    requestAnimationFrame(animate);
-    render();
+  const animateParticles = useCallback(() => {
+    frameId = requestAnimationFrame(animateParticles);
+    renderParticles();
+  }, [renderParticles]);
+
+  const cancelAnimation = () => {
+    if (frameId) {
+      cancelAnimationFrame(frameId);
+      frameId = undefined;
+    }
   };
 
   useEffect(() => {
@@ -82,6 +91,7 @@ export function BackgroundWaves() {
   }, [isMounted, canAnimate]);
 
   useEffect(() => {
+    cancelAnimation();
     if (!canAnimate) {
       return;
     }
@@ -130,10 +140,15 @@ export function BackgroundWaves() {
       scene = undefined;
       count = 0;
     };
-  }, [canAnimate, isThemeDark]);
+  }, [canAnimate, isThemeDark, mediaQuery]);
 
   useEffect(() => {
-    animate();
+    cancelAnimation();
+    if (!canAnimate) {
+      return;
+    }
+
+    animateParticles();
 
     // Delay makes transition smoother.
     const timeoutId = setInterval(() => {
@@ -141,8 +156,7 @@ export function BackgroundWaves() {
     }, 100);
 
     return () => clearTimeout(timeoutId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isMounted, canAnimate, isThemeDark, mediaQuery, animateParticles]);
 
   return (
     <div

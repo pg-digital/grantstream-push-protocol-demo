@@ -9,7 +9,7 @@ export enum ParticlePhysics {
   AmountY = 35,
   Radius = 0.1,
   // Contorls the speed of the wave animation effect.
-  Speed = 0.1,
+  Speed = 0.05,
 }
 
 export enum CameraPosition {

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import resolveConfig from "tailwindcss/resolveConfig";
 import { useMediaQuery } from "usehooks-ts";
 import tailwindConfig from "../tailwind.config";
@@ -21,7 +22,7 @@ export function useCustomMediaQuery(): CustomMediaQuery {
 
   const is2XlAndAbove = useMediaQuery(`(min-width: ${screens["2xl"]})`);
 
-  return {
+  const customMediaQueryObject = {
     isSm: [is2XlAndAbove, isXlAndAbove, isLgAndAbove, isMdAndAbove].every(
       (flag) => flag === false
     ),
@@ -30,4 +31,19 @@ export function useCustomMediaQuery(): CustomMediaQuery {
     isXlAndAbove,
     is2XlAndAbove,
   };
+
+  // Create a dependency key, from all the flags in the media query object.
+  const dependencyArrayKey = Object.entries(customMediaQueryObject).reduce(
+    (accumulator, [key, value]) => `${accumulator}[${key}:${value}]`,
+    ""
+  );
+
+  // Memoize the media query object using the key.
+  const memoizedMediaQueryObject = useMemo(() => {
+    return customMediaQueryObject;
+    // eslint-disable-next-line
+  }, [dependencyArrayKey]);
+
+  // Return the memoized object.
+  return memoizedMediaQueryObject;
 }

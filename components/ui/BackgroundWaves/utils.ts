@@ -37,17 +37,17 @@ export function createMaterialWithColor(
   });
 }
 
-export function determineSpeedFromQuery(query: CustomMediaQuery) {
+export function determineSpeedFromQuery(mediaQuery: CustomMediaQuery) {
   // Increase or decrease speed based on available screen area.
-  if (query.isXlAndAbove) {
+  if (mediaQuery.isXlAndAbove) {
     return ParticlePhysics.Speed;
   }
 
-  if (query.isLgAndAbove) {
+  if (mediaQuery.isLgAndAbove) {
     return ParticlePhysics.Speed / 2;
   }
 
-  if (query.isMdAndAbove) {
+  if (mediaQuery.isMdAndAbove) {
     return ParticlePhysics.Speed / 3;
   }
 
