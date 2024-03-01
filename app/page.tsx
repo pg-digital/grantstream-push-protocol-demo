@@ -2,12 +2,6 @@ import { Container } from "@/components/layout/Container";
 import { HeroSection } from "@/components/ui/HeroSection";
 import { AppMetadata } from "@/constants";
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
-
-const BackgroundWavesNoSSR = dynamic(
-  () => import("@/components/ui/BackgroundWaves"),
-  { ssr: false }
-);
 
 export const metadata: Metadata = {
   title: `${AppMetadata.TitlePrefix} | Home`,
@@ -16,13 +10,10 @@ export const metadata: Metadata = {
 
 export default function HomeLandingPage() {
   return (
-    <>
-      <BackgroundWavesNoSSR />
-      <Container>
-        <HeroSection title="GrantStream">
-          Funding made easy, for Web3 builders.
-        </HeroSection>
-      </Container>
-    </>
+    <Container>
+      <HeroSection title="GrantStream">
+        Funding made easy, for Web3 builders.
+      </HeroSection>
+    </Container>
   );
 }
