@@ -1,5 +1,6 @@
 import { Container } from "@/components/layout/Container";
 import { HeroSection } from "@/components/ui/HeroSection";
+import { TeamMembers } from "@/components/ui/TeamMembers";
 import { AppMetadata } from "@/constants";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
@@ -10,18 +11,25 @@ const BackgroundWavesNoSSR = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: `${AppMetadata.TitlePrefix} | Home`,
+  title: `${AppMetadata.TitlePrefix} | Push protocol demo`,
   description: AppMetadata.Description,
 };
 
-export default function HomeLandingPage() {
+export default function SupportDemoPage() {
   return (
     <>
       <BackgroundWavesNoSSR />
       <Container>
-        <HeroSection title="GrantStream">
-          Funding made easy, for Web3 builders.
+        <HeroSection title="Push protocol demo">
+          A simple demo for GrantStream MVP to test being able to provide user
+          support using Notion&apos;s web3 messaging protocol.
         </HeroSection>
+
+        <div className="flex justify-center">
+          <Container size="small" padding="none">
+            <TeamMembers />
+          </Container>
+        </div>
       </Container>
     </>
   );

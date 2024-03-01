@@ -3,6 +3,7 @@ import { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "GrantStream",
+    description: "Funding made easy, for Web3 builders.",
     icons: [
       {
         src: "/favicons/android-chrome-192x192.png",

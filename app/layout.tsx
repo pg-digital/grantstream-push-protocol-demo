@@ -50,7 +50,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <AppWagmiProvider>
             <div className="flex items-center justify-center min-h-screen pt-[66px]">
               <AppNavHeader />
-              <main className="flex-1 pt-10 pb-16 md:pt-12 md:pb-20 lg:pb-28">
+              <main className="flex-1 pt-10 pb-16 md:pt-12 md:pb-18 l:pt-14 lg:pb-20">
                 {children}
               </main>
             </div>
