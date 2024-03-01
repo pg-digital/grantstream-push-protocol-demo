@@ -7,11 +7,11 @@ interface HeroSectionProps {
 
 export function HeroSection({ title, children }: HeroSectionProps) {
   return (
-    <section className="mx-auto flex max-w-[980px] flex-col items-center gap-3 pb-6 md:pb-10 lg:pb-14">
-      <h1 className="text-center text-3xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]">
+    <section className="mx-auto flex max-w-[980px] flex-col items-center gap-3 pb-8 md:pb-10">
+      <h1 className="text-center font-extrabold tracking-tight scroll-m-20 text-4xl lg:text-5xl">
         {title}
       </h1>
-      <p className="inline-block align-top max-w-[580px] text-center text-lg text-muted-foreground sm:text-xl">
+      <p className="text-center max-w-[580px] text-muted-foreground text-xl">
         {children}
       </p>
     </section>
