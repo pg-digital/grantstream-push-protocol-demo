@@ -1,6 +1,7 @@
 import { Container } from "@/components/layout/Container";
-import { AppThemeToggle } from "@/components/providers/AppThemeToggle";
+// import { AppThemeToggle } from "@/components/providers/AppThemeToggle";
 import { Button } from "@/components/ui/Button";
+import { NavLinkExternal } from "@/constants";
 import { Calendar } from "lucide-react";
 import Link from "next/link";
 import { TwitterIcon } from "../SVGIcons";
@@ -8,7 +9,7 @@ import { TwitterIcon } from "../SVGIcons";
 function CalendlyLinkButton() {
   return (
     <Button variant="ghost" size="icon" asChild>
-      <Link href="https://calendly.com/grantstream/intro-call" target="_blank">
+      <Link href={NavLinkExternal.Calendly} target="_blank">
         <Calendar className="h-4 w-4" />
       </Link>
     </Button>
@@ -18,7 +19,7 @@ function CalendlyLinkButton() {
 function TwitterLinkButton() {
   return (
     <Button variant="ghost" size="icon" asChild>
-      <Link href="https://twitter.com/TeamGrantStream" target="_blank">
+      <Link href={NavLinkExternal.Twitter} target="_blank">
         <TwitterIcon className="h-3 w-3" />
       </Link>
     </Button>
@@ -32,7 +33,12 @@ export function AppNavHeader() {
         <nav className="flex flex-1 items-center space-x-1 justify-end">
           <CalendlyLinkButton />
           <TwitterLinkButton />
-          <AppThemeToggle />
+          {/**
+           * '<HeroLogoImage />' does not blend with the 'light' background.
+           * So theme toggle is disabled for the time being.
+           * @TODO: Re-enable it when we re-design the logo.
+           */}
+          {/* <AppThemeToggle /> */}
         </nav>
       </Container>
     </header>

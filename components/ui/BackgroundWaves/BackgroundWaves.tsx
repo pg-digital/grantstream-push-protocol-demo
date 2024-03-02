@@ -152,9 +152,13 @@ function BackgroundWaveParticles() {
     animateParticles();
 
     // Delay makes transition smoother.
-    const timeoutId = setInterval(() => {
-      if (isMounted()) setIsAnimating(true);
-    }, 150);
+    const timeoutId = setTimeout(() => {
+      requestAnimationFrame(() => {
+        if (isMounted()) {
+          setIsAnimating(true);
+        }
+      });
+    }, 50);
 
     return () => clearTimeout(timeoutId);
   }, [isMounted, canAnimate, isThemeDark, mediaQuery, animateParticles]);
@@ -162,7 +166,7 @@ function BackgroundWaveParticles() {
   return (
     <div
       className={cn(
-        "absolute top-0 left-0 w-screen h-screen z-0 opacity-0 transition-opacity duration-700",
+        "absolute bottom-0 left-0 w-screen h-[75dvh] lg:h-[80dvh] xl:h-[85dvh] z-0 opacity-0 transition-opacity duration-700 overflow-hidden",
         { "opacity-100": isAnimating }
       )}
       ref={containerRef}
