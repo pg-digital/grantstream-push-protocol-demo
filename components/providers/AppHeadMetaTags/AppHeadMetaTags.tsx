@@ -24,6 +24,11 @@ export function MetaTagsForOpenGraph() {
         property="og:description"
         content={AppMetadata.Description}
       />
+      <meta
+        key="meta_og-image"
+        property="og:image"
+        content={AppMetadata.Image}
+      />
     </>
   );
 }
