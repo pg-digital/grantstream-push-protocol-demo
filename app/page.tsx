@@ -34,7 +34,6 @@ export default function HomeLandingPage() {
   return (
     <Container className="grid justify-items-center gap-8 mb-[6dvh] lg:mb-[8dvh] xl:mb-[10dvh]">
       <HeroLogoImage />
-
       <div className="flex flex-col w-full max-w-[380px] gap-5">
         <HeroSection title="GrantStream" className="!pb-0">
           Funding made easy, for&nbsp;Web3&nbsp;builders.
