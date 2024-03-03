@@ -1,3 +1,7 @@
+import {
+  MetaTagsForFavicons,
+  MetaTagsForOpenGraph,
+} from "@/components/providers/AppHeadMetaTags";
 import { AppThemeProvider } from "@/components/providers/AppThemeProvider";
 import { AppWagmiProvider } from "@/components/providers/AppWagmiProvider";
 import { AppNavHeader } from "@/components/ui/AppNavHeader";
@@ -27,23 +31,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link
-          sizes="180x180"
-          rel="apple-touch-icon"
-          href="/favicons/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          sizes="32x32"
-          type="image/png"
-          href="/favicons/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          sizes="16x16"
-          type="image/png"
-          href="/favicons/favicon-16x16.png"
-        />
+        <MetaTagsForFavicons />
+        <MetaTagsForOpenGraph />
       </head>
       <body
         className={cn("bg-background antialiased m-0 p-0", GeistSans.className)}
