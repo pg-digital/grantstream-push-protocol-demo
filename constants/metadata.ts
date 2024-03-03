@@ -9,6 +9,7 @@ interface Favicon {
 export enum AppMetadata {
   TitlePrefix = "GrantStream",
   Description = "Funding made easy, for Web3 builders.",
+  Image = "https://grantstream-push-protocol-demo.vercel.app/screens/grant-stream-og-image_home_1600x900.png",
 }
 
 export const LogoMetadata = {
