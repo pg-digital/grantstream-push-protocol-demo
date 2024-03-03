@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function SupportDemoPage() {
   return (
-    <Container className="mb-[1dvh] lg:mb-[2dvh] xl:mb-[3dvh]">
+    <Container className="mb-[1vh] lg:mb-[2vh] xl:mb-[3vh]">
       <HeroSection title="Push protocol demo">
         A simple demo for GrantStream MVP to test being able to provide user
         support using Notion&apos;s web3 messaging protocol.

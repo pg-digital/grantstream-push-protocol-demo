@@ -32,7 +32,7 @@ function HeroLogoImage() {
 
 export default function HomeLandingPage() {
   return (
-    <Container className="grid justify-items-center gap-8 mb-[6dvh] lg:mb-[8dvh] xl:mb-[10dvh]">
+    <Container className="grid justify-items-center gap-8 mb-[6vh] lg:mb-[8vh] xl:mb-[10vh]">
       <HeroLogoImage />
       <div className="flex flex-col w-full max-w-[380px] gap-5">
         <HeroSection title="GrantStream" className="!pb-0">

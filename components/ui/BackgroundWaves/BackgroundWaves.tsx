@@ -166,7 +166,7 @@ function BackgroundWaveParticles() {
   return (
     <div
       className={cn(
-        "absolute bottom-0 left-0 w-screen h-[75dvh] lg:h-[80dvh] xl:h-[85dvh] z-0 opacity-0 transition-opacity duration-700 overflow-hidden",
+        "absolute bottom-0 left-0 w-full h-[75vh] lg:h-[80vh] xl:h-[85vh] z-0 opacity-0 transition-opacity duration-700 overflow-hidden",
         { "opacity-100": isAnimating }
       )}
       ref={containerRef}

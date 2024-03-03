@@ -44,14 +44,14 @@ export function determineSpeedFromQuery(mediaQuery: CustomMediaQuery) {
   }
 
   if (mediaQuery.isLgAndAbove) {
-    return ParticlePhysics.Speed / 2;
+    return ParticlePhysics.Speed / 1.5;
   }
 
   if (mediaQuery.isMdAndAbove) {
-    return ParticlePhysics.Speed / 3;
+    return ParticlePhysics.Speed / 2;
   }
 
-  return ParticlePhysics.Speed / 4;
+  return ParticlePhysics.Speed / 2.5;
 }
 
 export function createScene() {
