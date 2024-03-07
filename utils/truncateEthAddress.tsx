@@ -6,13 +6,13 @@ interface Options {
   separator?: "braces" | "brackets" | "parenthesis";
 }
 
-const opening = {
+const OPENING = {
   braces: "{",
   brackets: "[",
   parenthesis: "(",
 } as const;
 
-const closing = {
+const CLOSING = {
   braces: "}",
   brackets: "]",
   parenthesis: ")",
@@ -29,8 +29,8 @@ export function truncateEthAddress(address: EthAddress, options?: Options) {
   return (
     match && !nTotalIsLongerThanAddress
       ? `0x${address.slice(2, 2 + (nPrefix || 4))}${
-          separator ? opening[separator] : ""
-        }…${separator ? closing[separator] : ""}${address.slice(
+          separator ? OPENING[separator] : ""
+        }…${separator ? CLOSING[separator] : ""}${address.slice(
           address.length - (nSuffix || 4)
         )}`
       : address

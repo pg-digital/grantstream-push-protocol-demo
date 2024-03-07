@@ -1,30 +1,31 @@
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { HeroSection } from "@/components/ui/HeroSection";
-import { AppMetadata, LogoMetadata, NavLinkExternal } from "@/constants";
+import { APP_METADATA, LOGO_METADATA, NavLinkExternal } from "@/constants";
 import { cn } from "@/utils";
 import { Calendar } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+const title = `${APP_METADATA.title} | Home`;
 export const metadata: Metadata = {
-  title: `${AppMetadata.TitlePrefix} | Home`,
-  description: AppMetadata.Description,
+  ...APP_METADATA,
+  title,
 };
 
 function HeroLogoImage() {
+  const { alt, width, height, ...other } = LOGO_METADATA;
+
   return (
     <Image
-      priority
-      quality={100}
-      alt={LogoMetadata.Alt}
-      src={LogoMetadata.Src}
-      width={LogoMetadata.Width}
-      height={LogoMetadata.Height}
+      {...other}
+      alt={alt}
+      width={width}
+      height={height}
       className={cn(
         "contrast-[95%] brightness-[95%]",
-        `w-[${LogoMetadata.Width}px] h-[${LogoMetadata.Height}px]`
+        `w-[${width}px] h-[${height}px]`
       )}
     />
   );
