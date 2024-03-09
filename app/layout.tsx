@@ -1,11 +1,7 @@
-import {
-  MetaTagsForFavicons,
-  MetaTagsForOpenGraph,
-} from "@/components/providers/AppHeadMetaTags";
 import { AppThemeProvider } from "@/components/providers/AppThemeProvider";
 import { AppWagmiProvider } from "@/components/providers/AppWagmiProvider";
 import { AppNavHeader } from "@/components/ui/AppNavHeader";
-import { AppMetadata } from "@/constants";
+import { APP_METADATA } from "@/constants";
 import { cn } from "@/utils";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
@@ -18,8 +14,7 @@ interface RootLayoutProps {
 }
 
 export const metadata: Metadata = {
-  title: AppMetadata.TitlePrefix,
-  description: AppMetadata.Description,
+  ...APP_METADATA,
 };
 
 const BackgroundWavesNoSSR = dynamic(
@@ -30,10 +25,6 @@ const BackgroundWavesNoSSR = dynamic(
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <MetaTagsForFavicons />
-        <MetaTagsForOpenGraph />
-      </head>
       <body
         className={cn("bg-background antialiased m-0 p-0", GeistSans.className)}
       >

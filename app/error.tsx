@@ -2,13 +2,9 @@
 
 import { Container } from "@/components/layout/Container";
 import { HeroSection } from "@/components/ui/HeroSection";
-import { AppMetadata } from "@/constants";
+import { APP_METADATA } from "@/constants";
 import { Metadata } from "next";
 import { useEffect } from "react";
-
-enum PageMetaData {
-  Title = "An error occurred",
-}
 
 interface ErrorPageProps {
   // 'digest' is the generated hash of the error that was thrown.
@@ -18,9 +14,10 @@ interface ErrorPageProps {
   reset: () => void;
 }
 
+const title = `${APP_METADATA.title} | An error occurred`;
 export const metadata: Metadata = {
-  title: `${AppMetadata.TitlePrefix} | ${PageMetaData.Title}`,
-  description: AppMetadata.Description,
+  ...APP_METADATA,
+  title,
 };
 
 export default function ErrorPage({ error }: ErrorPageProps) {
@@ -33,8 +30,8 @@ export default function ErrorPage({ error }: ErrorPageProps) {
 
   return (
     <Container>
-      <HeroSection title={PageMetaData.Title}>
-        {AppMetadata.Description}
+      <HeroSection title="An error occurred">
+        {APP_METADATA.description}
       </HeroSection>
     </Container>
   );

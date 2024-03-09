@@ -1,12 +1,13 @@
 import { Container } from "@/components/layout/Container";
 import { HeroSection } from "@/components/ui/HeroSection";
 import { TeamMembers } from "@/components/ui/TeamMembers";
-import { AppMetadata } from "@/constants";
+import { APP_METADATA } from "@/constants";
 import { Metadata } from "next";
 
+const title = `${APP_METADATA.title} | Push protocol demo`;
 export const metadata: Metadata = {
-  title: `${AppMetadata.TitlePrefix} | Push protocol demo`,
-  description: AppMetadata.Description,
+  ...APP_METADATA,
+  title,
 };
 
 export default function SupportDemoPage() {
