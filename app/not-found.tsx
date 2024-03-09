@@ -1,22 +1,19 @@
 import { Container } from "@/components/layout/Container";
 import { HeroSection } from "@/components/ui/HeroSection";
-import { AppMetadata } from "@/constants";
+import { APP_METADATA } from "@/constants";
 import { Metadata } from "next";
 
-enum PageMetaData {
-  Title = "Page not found",
-}
-
+const title = `${APP_METADATA.title} | Page not found`;
 export const metadata: Metadata = {
-  title: `${AppMetadata.TitlePrefix} | ${PageMetaData.Title}`,
-  description: AppMetadata.Description,
+  ...APP_METADATA,
+  title,
 };
 
 export default function NotFoundPage() {
   return (
     <Container>
-      <HeroSection title={PageMetaData.Title}>
-        {AppMetadata.Description}
+      <HeroSection title="Page not found">
+        {APP_METADATA.description}
       </HeroSection>
     </Container>
   );
