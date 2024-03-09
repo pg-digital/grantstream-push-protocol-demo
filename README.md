@@ -67,7 +67,7 @@ const nextConfig = {
 
 ```diff
 - // import { AppThemeToggle } from "@/components/providers/AppThemeToggle";
-+ // import { AppThemeToggle } from "@/components/providers/AppThemeToggle";
++ import { AppThemeToggle } from "@/components/providers/AppThemeToggle";
 
 export function AppNavHeader() {
   return (
